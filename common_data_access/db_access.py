@@ -31,7 +31,7 @@ def get_data_from_db():
     # 環境変数の設定を読み込み
     raw_conn_string = env_production.get_env_variable('DATABASE_CONN_STRING')
     database_conn_string = parse_connection_string(raw_conn_string)
-    print(database_conn_string)
+
     try:
         # Azure SQL Serverに接続する
         connection = pyodbc.connect(database_conn_string)
