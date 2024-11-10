@@ -1,9 +1,9 @@
 import flet as ft
-from common_data_access.db_access import get_data_from_db
-from user_interface.ui import build_ui
-from common_data_access.file_access import download_file_from_azure, download_blob_from_azure
-from common_tools.ocr_processing import perform_ocr
-from common_data_access.generate_sas_url import generate_sas_url
+from app03_services.db_access import get_data_from_db
+from app01_views.ui import build_ui
+from app03_services.file_access import download_file_from_azure, download_blob_from_azure
+from app05_utils.ocr_processing import perform_ocr
+from app03_services.generate_sas_url import generate_sas_url
 import os
 import env_production
 
@@ -83,8 +83,8 @@ else:
 
 
 # import flet as ft
-# from common_data_access.db_access import get_data_from_db
-# from user_interface.ui import build_ui
+# from app03_services.db_access import get_data_from_db
+# from app01_views.ui import build_ui
 
 # def main(page: ft.Page):
 #     # 画面の初期化
