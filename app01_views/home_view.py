@@ -11,6 +11,7 @@ def home_view(page: ft.Page):
                 ft.Text("これはホームページです。"),
                 ft.ElevatedButton("ページ01へ", on_click=lambda e: page.go("/page01")),
                 ft.ElevatedButton("ページ02へ", on_click=lambda e: page.go("/page02")),
+                ft.ElevatedButton("ページ03へ", on_click=lambda e: page.go("/page03")),
                 ft.ElevatedButton("ページ99へ", on_click=lambda e: page.go("/page99")),
             ])
         ]
