@@ -100,8 +100,12 @@ def build_ui(page: ft.Page) -> ft.Control:
     ])
 
     # データベースからのデータ取得
-    data = get_data_from_db()
-    scrollable_content.controls.append(ft.Text(f"Database data: {data}"))
+    try:
+        data = get_data_from_db()
+        scrollable_content.controls.append(ft.Text(f"Database data: {data}"))
+    # エラーの場合はエラーメッセージを表示
+    except Exception as e:
+        scrollable_content.controls.append(ft.Text(f"Error getting data from database: {e}"))
 
     # 最終的なコンテナを返す
     return ft.Container(
