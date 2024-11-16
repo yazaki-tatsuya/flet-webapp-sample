@@ -54,6 +54,15 @@ def build_ui_v2(page: ft.Page) -> ft.Container:
     Returns:
         ft.Container: テーブルを含むコンテナ。
     """
+    """
+    一覧画面のテーブル形式のUIコンポーネントを構築します。
+    
+    Args:
+        page (ft.Page): Fletのページオブジェクト。
+    
+    Returns:
+        ft.Container: テーブルを含むコンテナ。
+    """
     # サンプルデータ
     data = [
         {"ID": 1, "名前": "アイテム1", "説明": "説明1"},
@@ -99,20 +108,33 @@ def build_ui_v2(page: ft.Page) -> ft.Container:
         ),
         # 水平線と垂直線を非表示にするために透明色と幅0を設定
         horizontal_lines=ft.Border(
-            top=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
-            bottom=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
+            top=ft.BorderSide(width=1, color=ft.colors.BLACK),
+            bottom=ft.BorderSide(width=1, color=ft.colors.BLACK),
             left=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
             right=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
         ),
         vertical_lines=ft.Border(
             top=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
             bottom=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
-            left=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
-            right=ft.BorderSide(width=0, color=ft.colors.TRANSPARENT),
+            left=ft.BorderSide(width=1, color=ft.colors.BLACK),
+            right=ft.BorderSide(width=1, color=ft.colors.BLACK),
         ),
     )
 
+    # レスポンシブなレイアウト
+    responsive_row = ft.ResponsiveRow(
+        controls=[
+            ft.Container(
+                content=data_table,
+                expand=True,  # 横幅を拡張
+            )
+        ],
+        alignment=ft.MainAxisAlignment.START,
+        # horizontal_alignment=ft.CrossAxisAlignment.START,
+    )
+
     return ft.Container(
-        content=data_table,
+        content=responsive_row,
         padding=ft.Padding(20, 20, 20, 20),
+        expand=True,  # 縦横の拡張
     )
