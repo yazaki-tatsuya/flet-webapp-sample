@@ -1,7 +1,7 @@
 # app01_views/page99_view.py
 import flet as ft
 from app02_ui_components.navbar import navbar
-from .build_ui import build_ui  # build_ui関数を別モジュールからインポート
+from .build_ui import build_ui 
 
 def page99_view(page: ft.Page):
 
