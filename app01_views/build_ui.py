@@ -25,9 +25,9 @@ def build_ui(page: ft.Page) -> ft.Control:
     )
 
     # 環境変数の取得
-    connection_string = env_production.get_env_variable("AZURE_CONNECTION_STRING")
-    container_name = env_production.get_env_variable("AZURE_SHARE_NAME")
-    blob_name = env_production.get_env_variable("AZURE_FILE_NAME")
+    connection_string = env_production.get_env_variable("AZURE_STORAGE_CONNECTION_STRING")
+    container_name = env_production.get_env_variable("AZURE_STORAGE_CONTAINER_NAME")
+    blob_name = env_production.get_env_variable("AZURE_STORAGE_FILE_NAME")
     download_path = f"./downloads/{blob_name}"
 
     # ダウンロードパスのディレクトリを作成

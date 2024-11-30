@@ -17,4 +17,3 @@ def page99_view(page: ft.Page):
             ft.Text("これはページ99です。")
         ]
     )
-
