@@ -18,6 +18,8 @@ def speech_to_text(audio_file_path: str, speech_key, service_region) -> str:
 
     # Speech SDKの構成
     speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
+    # 日本語を指定
+    speech_config.speech_recognition_language = "ja-JP"
     audio_config = speechsdk.audio.AudioConfig(filename=audio_file_path)
 
     # 音声認識オブジェクトの作成
