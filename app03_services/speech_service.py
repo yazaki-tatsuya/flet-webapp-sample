@@ -4,7 +4,7 @@ import os
 import tempfile
 from app03_services.file_access import download_blob_from_azure
 from app03_services.file_access import download_file_from_azure
-from app03_services.speech_recognition import speech_to_text
+from app03_services.speech_recognition import speech_to_text, speech_to_text_microphone
 
 def process_speech_recognition_blob(connection_string, container_name, blob_name, subscription_key, region):
     """
@@ -62,3 +62,15 @@ def process_speech_recognition_file_share(connection_string, share_name, directo
         # 一時ファイルを削除
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
+
+
+def process_speech_recognition_michrophone(subscription_key, region):
+    """
+    マイクから音声を認識し、テキストに変換します。
+
+    :param subscription_key: Azure Speechサービスのサブスクリプションキー
+    :param region: Azure Speechサービスのリージョン
+    :return: 認識されたテキスト
+    """
+    text = speech_to_text_microphone(subscription_key, region)
+    return text
