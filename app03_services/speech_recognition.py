@@ -3,6 +3,9 @@
 import azure.cognitiveservices.speech as speechsdk
 import env_production
 
+############################################
+# パターン1: 音声ファイルをテキストに変換する
+############################################
 def speech_to_text(audio_file_path: str, speech_key, service_region) -> str:
     """
     音声データをテキストに変換します。
@@ -39,3 +42,49 @@ def speech_to_text(audio_file_path: str, speech_key, service_region) -> str:
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
             error_msg += f"\nエラー詳細: {cancellation_details.error_details}"
         raise Exception(error_msg)
+
+############################################
+# パターン2: マイクから音声をテキストに変換する
+############################################
+def speech_to_text_microphone(subscription_key, region, language="ja-JP"):
+    """
+    マイクから音声を認識し、テキストを返します。
+    """
+    try:
+        # Speech Config を作成
+        speech_config = speechsdk.SpeechConfig(subscription=subscription_key, region=region)
+        speech_config.speech_recognition_language = language
+        audio_config = speechsdk.AudioConfig(use_default_microphone=True)
+
+        # Speech Recognizer を作成
+        recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
+
+        print("マイク入力を開始します。話してください...")
+
+        # 音声認識を実行
+        result = recognizer.recognize_once_async().get()
+
+        if result.reason == speechsdk.ResultReason.RecognizedSpeech:
+            return result.text
+        elif result.reason == speechsdk.ResultReason.NoMatch:
+            return "音声を認識できませんでした。"
+        elif result.reason == speechsdk.ResultReason.Canceled:
+            cancellation_details = result.cancellation_details
+            return f"認識がキャンセルされました: {cancellation_details.error_details}"
+
+        # 不要？？
+        # # イベントリスナーを登録
+        # speech_recognizer.recognized.connect(recognized_cb)
+
+        # # 継続的に音声を認識
+        # speech_recognizer.start_continuous_recognition()
+
+        # try:
+        #     while True:
+        #         pass  # 無限ループで待機（Ctrl+Cで停止）
+        # except KeyboardInterrupt:
+        #     print("終了します...")
+        #     speech_recognizer.stop_continuous_recognition()
+
+    except Exception as e:
+        return f"エラーが発生しました: {e}"
